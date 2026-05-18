@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aula 2 — CI/CD com GitHub Actions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #0f3460 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .cover .tag {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 6px 18px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .cover h1 span { color: #4cc9f0; }
+
+    .cover p.subtitle {
+      font-size: 18px;
+      opacity: 0.75;
+      max-width: 540px;
+      margin: 0 auto 40px;
+    }
+
+    .cover .meta {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 14px;
+      opacity: 0.6;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 30px;
+      margin-top: 10px;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 50px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #4cc9f0;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f3460;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #e8ecf4;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #16213e;
+      margin: 28px 0 12px;
+    }
+
+    h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f3460;
+      margin: 20px 0 8px;
+    }
+
+    p { margin-bottom: 14px; color: #3a3a5c; }
+
+    /* ── ANALOGIA ── */
+    .analogy-box {
+      background: linear-gradient(135deg, #0f346010, #4cc9f010);
+      border: 1px solid #4cc9f040;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin: 20px 0;
+    }
+
+    .analogy-box .analogy-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #4cc9f0;
+      margin-bottom: 8px;
+    }
+
+    .analogy-box p { margin: 0; font-size: 15px; color: #1a2a4a; }
+
+    /* ── CÓDIGO ── */
+    .code-block {
+      background: #0d1117;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 20px 0;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .code-block .code-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #4cc9f0;
+      margin-bottom: 14px;
+    }
+
+    .code-block pre {
+      font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #e6edf3;
+      white-space: pre;
+    }
+
+    .code-block .comment { color: #6e7681; }
+    .code-block .key     { color: #79c0ff; }
+    .code-block .val     { color: #a5d6ff; }
+    .code-block .str     { color: #a8d8a8; }
+    .code-block .kw      { color: #ff7b72; }
+    .code-block .sym     { color: #ffa657; }
+
+    /* ── ANOTAÇÕES INLINE ── */
+    .annotated-line {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 6px 0;
+      border-bottom: 1px solid #e8ecf420;
+    }
+
+    .annotated-line:last-child { border-bottom: none; }
+
+    .ann-code {
+      font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      color: #e6edf3;
+      min-width: 260px;
+    }
+
+    .ann-note {
+      font-size: 13px;
+      color: #8892b0;
+      padding-top: 1px;
+    }
+
+    /* ── CONCEITO CARD ── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .concept-card {
+      background: #f7f9fc;
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 3px solid #4361ee;
+    }
+
+    .concept-card h4 { margin: 0 0 8px; font-size: 14px; color: #0f3460; }
+    .concept-card p  { margin: 0; font-size: 13px; color: #5a6080; }
+
+    /* ── FLUXO / PIPELINE ── */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 28px 0;
+      flex-wrap: wrap;
+    }
+
+    .pipe-step {
+      background: linear-gradient(135deg, #0f3460, #16213e);
+      color: white;
+      border-radius: 10px;
+      padding: 14px 18px;
+      text-align: center;
+      min-width: 120px;
+      flex: 1;
+    }
+
+    .pipe-step .pipe-icon { font-size: 22px; margin-bottom: 6px; }
+    .pipe-step .pipe-name { font-size: 12px; font-weight: 700; color: #4cc9f0; text-transform: uppercase; letter-spacing: 1px; }
+    .pipe-step .pipe-desc { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+
+    .pipe-arrow {
+      font-size: 22px;
+      color: #4cc9f0;
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+
+    /* ── ALERTA / INSIGHT ── */
+    .insight-box {
+      background: #f0f4ff;
+      border-left: 4px solid #4361ee;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #2d3561;
+    }
+
+    .insight-box strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #4361ee;
+      margin-bottom: 6px;
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid #e8ecf4;
+      font-size: 14px;
+      color: #3a3a5c;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #4361ee;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── OUTCOME ── */
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .outcome-card {
+      background: linear-gradient(135deg, #0f3460, #16213e);
+      color: white;
+      border-radius: 14px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .outcome-card .icon { font-size: 28px; margin-bottom: 10px; }
+    .outcome-card h4 { color: #4cc9f0; font-size: 14px; margin-bottom: 6px; margin-top: 0; }
+    .outcome-card p { color: rgba(255,255,255,0.7); font-size: 13px; margin: 0; }
+
+    /* ── DOPAMINA ── */
+    .dopamine-box {
+      background: linear-gradient(135deg, #4361ee15, #4cc9f015);
+      border: 1px solid #4361ee30;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #2d3561;
+    }
+
+    .dopamine-box strong {
+      color: #4361ee;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── STEP NUMBERED ── */
+    .step-list { margin: 20px 0; }
+
+    .step-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .step-num {
+      background: #4cc9f0;
+      color: #0f3460;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content h4 { margin: 0 0 6px; }
+    .step-content p  { margin: 0; font-size: 14px; }
+
+    /* ── TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: #0f3460;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e8ecf4;
+      color: #3a3a5c;
+    }
+
+    tr:nth-child(even) td { background: #f7f9fc; }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── BADGE ── */
+    .badge-preview {
+      background: #161b22;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge-img {
+      background: #238636;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .badge-note { font-size: 13px; color: #8b949e; }
+
+    /* ── HIGHLIGHT ── */
+    .highlight {
+      background: linear-gradient(135deg, #4361ee08, #4cc9f008);
+      border: 1px solid #4361ee20;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #2d3561;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #8892b0;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     CAPA
+════════════════════════════════════════ -->
+<div class="cover">
+  <div class="tag">Semana 2 · Fase 1 — Docker + CI/CD</div>
+  <h1>CI/CD com<br><span>GitHub Actions</span></h1>
+  <p class="subtitle">Do "funciona na minha máquina" para "funciona em todo lugar, sempre, automaticamente."</p>
+  <div class="meta">
+    <span>📚 Aula 2 de 6</span>
+    <span>⏱ ~45 min de leitura</span>
+    <span>🎯 nexus-core com badge CI verde</span>
+    <span>👤 Enzo Alexandre</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PÁGINA
+════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- ── O QUE É CI/CD ── -->
+  <div class="section">
+    <div class="section-label">Conceito fundamental</div>
+    <h2>O que é CI/CD — em 30 segundos</h2>
+
+    <p>
+      <strong>CI</strong> (Integração Contínua) é a prática de rodar testes e verificações automaticamente
+      toda vez que alguém faz um <code>git push</code>. Você não precisa lembrar de rodar — a máquina roda.<br><br>
+      <strong>CD</strong> (Entrega/Deploy Contínuo) é a prática de enviar o código aprovado para produção
+      automaticamente, sem intervenção manual.
+    </p>
+
+    <div class="analogy-box">
+      <div class="analogy-label">Analogia</div>
+      <p>
+        Imagina uma fábrica de carros. Sem CI/CD, cada operário monta seu trecho e no final alguém testa o carro inteiro —
+        se algo quebrou, você não sabe onde nem quando. <strong>Com CI/CD</strong>, a esteira tem sensores em cada etapa:
+        se a porta não encaixa no painel B, a linha para imediatamente e você sabe exatamente o que quebrou.
+        Seu código é a fábrica. O GitHub Actions é a esteira com sensores.
+      </p>
+    </div>
+
+    <div class="insight-box">
+      <strong>Por que isso importa para você agora</strong>
+      Docker sem CI/CD é um projeto pessoal. Docker <em>com</em> CI/CD é evidência de maturidade profissional.
+      Todo recrutador de vaga pleno/sênior procura o badge verde no README — ele sinaliza que você entrega código confiável, não só código que funciona.
+    </div>
+  </div>
+
+  <!-- ── PIPELINE VISUAL ── -->
+  <div class="section">
+    <div class="section-label">Como funciona</div>
+    <h2>O fluxo completo</h2>
+
+    <p>Quando você dá <code>git push</code>, o GitHub Actions executa uma série de etapas em ordem:</p>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-icon">📝</div>
+        <div class="pipe-name">Push</div>
+        <div class="pipe-desc">Você envia código</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">⚡</div>
+        <div class="pipe-name">Trigger</div>
+        <div class="pipe-desc">GitHub detecta o evento</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">🖥️</div>
+        <div class="pipe-name">Runner</div>
+        <div class="pipe-desc">VM limpa é criada</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">🔨</div>
+        <div class="pipe-name">Build</div>
+        <div class="pipe-desc">Compila o projeto</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">✅</div>
+        <div class="pipe-name">Test</div>
+        <div class="pipe-desc">Roda os testes</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">🚀</div>
+        <div class="pipe-name">Deploy</div>
+        <div class="pipe-desc">(opcional) Publica</div>
+      </div>
+    </div>
+
+    <p>
+      Se qualquer etapa falha, o pipeline para e você recebe notificação. O badge no README fica vermelho.
+      Se tudo passa, o badge fica verde e o código segue em frente.
+    </p>
+  </div>
+
+  <!-- ── ANATOMIA DO ARQUIVO ── -->
+  <div class="section">
+    <div class="section-label">Anatomia</div>
+    <h2>Dissecando um workflow YAML</h2>
+
+    <p>
+      Todo pipeline do GitHub Actions vive em um arquivo <code>.yml</code> dentro de
+      <code>.github/workflows/</code> no seu repositório. Vamos ler linha a linha:
+    </p>
+
+    <div class="code-block">
+      <div class="code-label">📄 .github/workflows/ci.yml — estrutura completa anotada</div>
+      <pre>
+<span class="key">name</span><span class="sym">:</span> <span class="str">CI Pipeline</span>               <span class="comment"># Nome que aparece na aba Actions do GitHub</span>
+
+<span class="key">on</span><span class="sym">:</span>                             <span class="comment"># QUANDO este workflow deve rodar?</span>
+  <span class="key">push</span><span class="sym">:</span>
+    <span class="key">branches</span><span class="sym">:</span> <span class="sym">[</span><span class="str">main</span><span class="sym">]</span>           <span class="comment"># Roda a cada push na branch main</span>
+  <span class="key">pull_request</span><span class="sym">:</span>
+    <span class="key">branches</span><span class="sym">:</span> <span class="sym">[</span><span class="str">main</span><span class="sym">]</span>           <span class="comment"># E a cada PR aberto para main</span>
+
+<span class="key">jobs</span><span class="sym">:</span>                            <span class="comment"># O QUE fazer? (pode ter vários jobs em paralelo)</span>
+  <span class="key">build-and-test</span><span class="sym">:</span>               <span class="comment"># Nome do job (você escolhe)</span>
+    <span class="key">runs-on</span><span class="sym">:</span> <span class="str">ubuntu-latest</span>     <span class="comment"># Em qual máquina rodar (grátis no GitHub)</span>
+
+    <span class="key">steps</span><span class="sym">:</span>                       <span class="comment"># Passos sequenciais dentro do job</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Checkout código</span>
+        <span class="key">uses</span><span class="sym">:</span> <span class="str">actions/checkout@v4</span>  <span class="comment"># Action oficial: clona seu repositório</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Setup .NET</span>
+        <span class="key">uses</span><span class="sym">:</span> <span class="str">actions/setup-dotnet@v4</span>
+        <span class="key">with</span><span class="sym">:</span>
+          <span class="key">dotnet-version</span><span class="sym">:</span> <span class="str">'8.0.x'</span>  <span class="comment"># Instala o .NET na VM</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Restaurar dependências</span>
+        <span class="key">run</span><span class="sym">:</span> <span class="str">dotnet restore</span>          <span class="comment"># Equivale ao npm install</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Build</span>
+        <span class="key">run</span><span class="sym">:</span> <span class="str">dotnet build --no-restore --configuration Release</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Testes</span>
+        <span class="key">run</span><span class="sym">:</span> <span class="str">dotnet test --no-build --verbosity normal</span>
+      </pre>
+    </div>
+
+    <p>Esse é o arquivo mínimo para um projeto .NET. Cada linha tem um propósito claro — nada de magia.</p>
+  </div>
+
+  <!-- ── CONCEITOS CHAVE ── -->
+  <div class="section">
+    <div class="section-label">Vocabulário</div>
+    <h2>Os 6 conceitos que você precisa dominar</h2>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>Workflow</h4>
+        <p>O arquivo YAML inteiro. Um repositório pode ter vários workflows (ex: um para CI, outro para deploy).</p>
+      </div>
+      <div class="concept-card">
+        <h4>Event (on:)</h4>
+        <p>O gatilho. Pode ser push, pull_request, schedule (cron), workflow_dispatch (manual), e mais.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Job</h4>
+        <p>Um grupo de steps que roda em uma máquina. Múltiplos jobs rodam em paralelo por padrão.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Step</h4>
+        <p>Um comando ou action dentro de um job. Sempre executa em sequência dentro do job.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Action</h4>
+        <p>Um passo reutilizável publicado no marketplace. Ex: <code>actions/checkout</code> é mantido pelo próprio GitHub.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Runner</h4>
+        <p>A máquina virtual onde o job roda. O GitHub oferece Ubuntu, Windows e macOS — grátis para repositórios públicos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECRETS ── -->
+  <div class="section">
+    <div class="section-label">Segurança</div>
+    <h2>Segredos e variáveis de ambiente</h2>
+
+    <p>
+      Você <strong>nunca</strong> coloca senhas, tokens ou connection strings diretamente no YAML.
+      O GitHub tem um cofre chamado <strong>Secrets</strong> — você armazena lá e referencia no workflow:
+    </p>
+
+    <div class="code-block">
+      <div class="code-label">📄 Usando secrets no workflow</div>
+      <pre>
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Deploy</span>
+        <span class="key">env</span><span class="sym">:</span>
+          <span class="key">CONNECTION_STRING</span><span class="sym">:</span> <span class="sym">${{</span> <span class="str">secrets.DB_CONNECTION_STRING</span> <span class="sym">}}</span>
+          <span class="key">API_KEY</span><span class="sym">:</span> <span class="sym">${{</span> <span class="str">secrets.OPENAI_KEY</span> <span class="sym">}}</span>
+        <span class="key">run</span><span class="sym">:</span> <span class="str">dotnet publish</span>
+      </pre>
+    </div>
+
+    <p>
+      Para cadastrar: <strong>Repositório → Settings → Secrets and variables → Actions → New repository secret</strong>.
+      O valor nunca aparece nos logs — o GitHub mascarara automaticamente.
+    </p>
+
+    <div class="insight-box">
+      <strong>Regra de ouro</strong>
+      Se o valor muda entre ambientes (dev/prod) ou é sensível: vai para Secrets.
+      Se é público e fixo (versão do .NET, nome do projeto): vai direto no YAML.
+    </div>
+  </div>
+
+  <!-- ── DOCKER + CI/CD ── -->
+  <div class="section">
+    <div class="section-label">Integração com Aula 1</div>
+    <h2>Docker dentro do GitHub Actions</h2>
+
+    <p>
+      Você aprendeu Docker na Aula 1. Agora o CI/CD vai <em>usar</em> seu Docker para garantir que
+      o build funciona em qualquer ambiente — incluindo o servidor de produção.
+    </p>
+
+    <div class="code-block">
+      <div class="code-label">📄 Workflow que builda e publica imagem Docker</div>
+      <pre>
+<span class="key">name</span><span class="sym">:</span> <span class="str">Docker Build & Push</span>
+
+<span class="key">on</span><span class="sym">:</span>
+  <span class="key">push</span><span class="sym">:</span>
+    <span class="key">branches</span><span class="sym">:</span> <span class="sym">[</span><span class="str">main</span><span class="sym">]</span>
+
+<span class="key">jobs</span><span class="sym">:</span>
+  <span class="key">docker</span><span class="sym">:</span>
+    <span class="key">runs-on</span><span class="sym">:</span> <span class="str">ubuntu-latest</span>
+    <span class="key">steps</span><span class="sym">:</span>
+
+      <span class="sym">-</span> <span class="key">uses</span><span class="sym">:</span> <span class="str">actions/checkout@v4</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Login no Docker Hub</span>
+        <span class="key">uses</span><span class="sym">:</span> <span class="str">docker/login-action@v3</span>
+        <span class="key">with</span><span class="sym">:</span>
+          <span class="key">username</span><span class="sym">:</span> <span class="sym">${{</span> <span class="str">secrets.DOCKER_USERNAME</span> <span class="sym">}}</span>
+          <span class="key">password</span><span class="sym">:</span> <span class="sym">${{</span> <span class="str">secrets.DOCKER_TOKEN</span> <span class="sym">}}</span>
+
+      <span class="sym">-</span> <span class="key">name</span><span class="sym">:</span> <span class="str">Build e Push</span>
+        <span class="key">uses</span><span class="sym">:</span> <span class="str">docker/build-push-action@v5</span>
+        <span class="key">with</span><span class="sym">:</span>
+          <span class="key">context</span><span class="sym">:</span> <span class="str">.</span>
+          <span class="key">push</span><span class="sym">:</span> <span class="kw">true</span>
+          <span class="key">tags</span><span class="sym">:</span> <span class="str">enzoagw/nexus-core:latest</span>
+      </pre>
+    </div>
+
+    <p>
+      Isso significa: a cada push na main, o GitHub builda a imagem Docker do <code>nexus-core</code>
+      e publica automaticamente no Docker Hub. Qualquer pessoa pode rodar com <code>docker pull enzoagw/nexus-core</code>.
+    </p>
+  </div>
+
+  <!-- ── O BADGE ── -->
+  <div class="section">
+    <div class="section-label">Entregável da semana</div>
+    <h2>O badge CI verde no README</h2>
+
+    <p>
+      O badge é a prova pública de que seu pipeline está verde. Recrutadores e tech leads veem isso
+      antes mesmo de ler uma linha de código — é sinalização instantânea de qualidade.
+    </p>
+
+    <div class="code-block">
+      <div class="code-label">📄 Adicionar ao README.md do nexus-core</div>
+      <pre>
+<span class="comment"><!-- Substitua EnzoAGW/nexus-core pelo seu usuário/repositório --></span>
+![CI](https://github.com/EnzoAGW/nexus-core/actions/workflows/ci.yml/badge.svg)
+      </pre>
+    </div>
+
+    <div class="badge-preview">
+      <div class="badge-img">✓ CI passing</div>
+      <div class="badge-note">← É isso que vai aparecer no seu README quando o pipeline estiver verde</div>
+    </div>
+
+    <div class="insight-box">
+      <strong>Por que o badge importa para sua carreira</strong>
+      No GitHub, badges são verificáveis — qualquer um pode clicar e ver o histórico de execuções.
+      Isso transforma seu repositório de "projeto pessoal" para "evidência auditável de boas práticas."
+      É exatamente o que falta no seu perfil hoje (gap crítico identificado na análise inicial).
+    </div>
+  </div>
+
+  <!-- ── PLANO DE EXECUÇÃO ── -->
+  <div class="section">
+    <div class="section-label">Mão na massa</div>
+    <h2>Como implementar no nexus-core agora</h2>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Criar a estrutura de pastas</h4>
+          <p>No raiz do repositório <code>nexus-core</code>, crie a pasta <code>.github/workflows/</code> e o arquivo <code>ci.yml</code>.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Colar o workflow mínimo</h4>
+          <p>Use o arquivo da seção "Anatomia" acima. Ajuste a versão do .NET para a que você usa no projeto.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Fazer push e observar</h4>
+          <p>Abra a aba <strong>Actions</strong> no GitHub. Você vai ver o workflow rodar em tempo real. Acompanhe cada step.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Corrigir falhas (se houver)</h4>
+          <p>Se o build falhar, clique no step com erro — o log mostra a linha exata do problema. Esse processo de debug faz parte do aprendizado.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Adicionar o badge ao README</h4>
+          <p>Com o pipeline verde, cole o badge no README e faça um post no LinkedIn: "Configurei CI/CD no nexus-core com GitHub Actions."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dopamine-box">
+      <strong>Alavanca dopaminérgica desta semana</strong>
+      O badge verde é um feedback imediato e público de que você completou algo real. Não é um certificado
+      de curso — é evidência viva no seu GitHub. Isso ativa o circuito de recompensa de forma diferente
+      porque é verificável por terceiros, não apenas por você.
+    </div>
+  </div>
+
+  <!-- ── ERROS COMUNS ── -->
+  <div class="section">
+    <div class="section-label">Armadilhas</div>
+    <h2>Erros que todo mundo comete na primeira vez</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Erro</th>
+          <th>Causa</th>
+          <th>Solução</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Indentação YAML inválida</td>
+          <td>YAML usa espaços, não tabs — e o número de espaços importa</td>
+          <td>Use o validador online yaml.lint ou instale a extensão YAML no VS Code</td>
+        </tr>
+        <tr>
+          <td>dotnet restore falha</td>
+          <td>Versão do .NET no workflow diferente da do projeto</td>
+          <td>Verifique o <code>global.json</code> ou o <code>.csproj</code> e ajuste o <code>dotnet-version</code></td>
+        </tr>
+        <tr>
+          <td>Testes não encontrados</td>
+          <td><code>dotnet test</code> na raiz não encontra os projetos de teste</td>
+          <td>Aponte o caminho: <code>dotnet test ./NexusCore.Tests/</code></td>
+        </tr>
+        <tr>
+          <td>Secret não funciona</td>
+          <td>Nome do secret no GitHub diferente do que está no YAML</td>
+          <td>Case-sensitive: <code>secrets.DB_STRING</code> ≠ <code>secrets.db_string</code></td>
+        </tr>
+        <tr>
+          <td>Workflow não dispara</td>
+          <td>Branch errada no <code>on.push.branches</code></td>
+          <td>Verifique se sua branch principal é <code>main</code> ou <code>master</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── ALÉM DO BÁSICO ── -->
+  <div class="section">
+    <div class="section-label">Próximo nível</div>
+    <h2>O que vem depois (não agora)</h2>
+
+    <p>Foco desta semana é o pipeline básico com badge verde. Mas quando quiser expandir:</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>Matrix builds</h4>
+        <p>Rodar o mesmo job em múltiplas versões do .NET ou sistemas operacionais simultaneamente.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Caching de dependências</h4>
+        <p>Salvar o resultado do <code>dotnet restore</code> entre runs — reduz tempo de 3 min para 30s.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Ambientes (Environments)</h4>
+        <p>Separar staging de production com aprovação manual antes do deploy em prod.</p>
+      </div>
+      <div class="concept-card">
+        <h4>Artifacts</h4>
+        <p>Salvar o binário compilado ou relatório de cobertura de testes entre jobs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── OUTCOMES ── -->
+  <div class="section">
+    <div class="section-label">Resultado esperado</div>
+    <h2>O que você terá ao fim da semana 2</h2>
+
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="icon">✅</div>
+        <h4>Pipeline funcionando</h4>
+        <p>Build + teste automático a cada push no nexus-core</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">🏷️</div>
+        <h4>Badge no README</h4>
+        <p>Evidência pública e verificável de CI verde</p>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">📣</div>
+        <h4>Post no LinkedIn</h4>
+        <p>Visibilidade para recrutadores + sinalização de senioridade</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>Impacto no perfil:</strong> Com Docker (Aula 1) + CI/CD (Aula 2), você fecha o gap eliminatório
+      mais crítico do seu perfil. Qualquer tech lead que abrir o <code>nexus-core</code> vai ver:
+      Dockerfile, docker-compose, pipeline automatizado, badge verde, README com instruções.
+      Isso é o que diferencia "listou Docker no CV" de "demonstra Docker na prática."
+    </div>
+  </div>
+
+  <!-- ── CHECKLIST ── -->
+  <div class="section">
+    <div class="section-label">Checklist da semana</div>
+    <h2>Antes de avançar para a Aula 3</h2>
+
+    <ul class="checklist">
+      <li><div class="check-icon"></div>Pasta <code>.github/workflows/</code> criada no nexus-core</li>
+      <li><div class="check-icon"></div>Arquivo <code>ci.yml</code> com build e test configurados</li>
+      <li><div class="check-icon"></div>Pipeline rodou pelo menos uma vez com sucesso (badge verde)</li>
+      <li><div class="check-icon"></div>Badge adicionado ao <code>README.md</code></li>
+      <li><div class="check-icon"></div>Post publicado no LinkedIn com screenshot do badge</li>
+      <li><div class="check-icon"></div>(Bônus) Imagem Docker sendo publicada no Docker Hub via CI</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  Aula 2 de 6 · Plano de Carreira Enzo Alexandre · Fase 1 — Docker + CI/CD
+</div>
+
+</body>
+</html>
