@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,7 +30,7 @@
       line-height: 1.75;
     }
 
-    /* ── CAPA ── */
+    /* ── COVER ── */
     .cover {
       background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #0a1628 100%);
       color: white;
@@ -223,7 +223,7 @@
     .line .highlight-line { color: #ffa657; }
     .line .flag { color: #d2a8ff; }
 
-    /* ── ANALOGIA VISUAL ── */
+    /* ── ANALOGY VISUAL ── */
     .analogy {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -258,7 +258,7 @@
       text-align: center;
     }
 
-    /* ── CONCEITO VISUAL ── */
+    /* ── CONCEPT GRID ── */
     .concept-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -280,7 +280,7 @@
     .concept-card h4 { font-size: 14px; margin-bottom: 8px; }
     .concept-card p { font-size: 13px; color: var(--text-soft); margin: 0; }
 
-    /* ── DIAGRAMA DOCKER ── */
+    /* ── DOCKER DIAGRAM ── */
     .docker-diagram {
       background: var(--blue-mid);
       border-radius: 18px;
@@ -383,7 +383,7 @@
     .highlight.orange-hl strong { color: var(--orange); }
     .highlight.dark-hl strong { color: var(--accent); }
 
-    /* ── COMPARAÇÃO ── */
+    /* ── COMPARISON TABLE ── */
     .compare-table {
       width: 100%;
       border-collapse: collapse;
@@ -451,7 +451,7 @@
     .layer.rw { background: #e74c3c18; color: var(--red); border: 1.5px dashed #e74c3c40; }
     .layer.rw .num { background: var(--red); color: white; }
 
-    /* ── PASSO A PASSO ── */
+    /* ── STEPS ── */
     .steps { margin: 20px 0; }
 
     .step {
@@ -527,7 +527,7 @@
 </head>
 <body>
 
-<!-- CAPA -->
+<!-- COVER -->
 <div class="cover">
   <div class="tag">Module 1 · Lesson 1</div>
   <h1>
@@ -545,14 +545,14 @@
     <span>What is an Image</span>
     <span>What is a Container</span>
     <span>Layers</span>
-    <span>Essebtuak Commands</span>
+    <span>Essential Commands</span>
     <span>Hands-on</span>
   </div>
 </div>
 
 <div class="page">
 
-  <!-- CAP 1 — POR QUE DOCKER EXISTE -->
+  <!-- CHAPTER 1 — WHY DOCKER EXISTS -->
   <div class="section">
     <div class="section-label">Chapter 1 · The Problem</div>
     <h2>Why does Docker exist?</h2>
@@ -567,43 +567,43 @@
 
     <p>You finish a feature, it works perfectly locally. You deploy it to the client's server and it breaks. Why? Because the server has a different version of Node. Or .NET. Or an environment variable with a different name. Or a different operating system. Or a database with a different configuration.</p>
 
-    <p>O ambiente onde o código roda importa tanto quanto o código em si. E ambientes são frágeis, inconsistentes, e impossíveis de "versionar" do jeito tradicional.</p>
+    <p>The environment where the code runs matters just as much as the code itself. And environments are fragile, inconsistent, and impossible to "version" the traditional way.</p>
 
-    <h3>O que Docker resolve</h3>
+    <h3>What Docker solves</h3>
 
-    <p>Docker cria um <strong>pacote completo</strong> que contém não só o seu código, mas o ambiente inteiro que ele precisa para rodar: o sistema operacional base, as dependências, as configurações, as variáveis de ambiente. Tudo junto, versionado, portátil.</p>
+    <p>Docker creates a <strong>complete package</strong> that contains not just your code, but the entire environment it needs to run: the base operating system, the dependencies, the configurations, the environment variables. Everything together, versioned, and portable.</p>
 
     <div class="highlight green-hl">
-      <strong>A promessa do Docker:</strong> se roda na sua máquina, roda em qualquer lugar. Sem exceções. O ambiente viaja junto com o código.
+      <strong>Docker's promise:</strong> if it runs on your machine, it runs anywhere. No exceptions. The environment travels with the code.
     </div>
 
-    <p>Pense assim: em vez de entregar só o código do seu projeto e torcer para o servidor ter a versão certa do .NET, você entrega o projeto <em>mais</em> o .NET <em>mais</em> as configurações <em>mais</em> o sistema operacional necessário, tudo empacotado em um único arquivo.</p>
+    <p>Think of it this way: instead of delivering only your project's code and hoping the server has the right version of .NET, you deliver the project <em>plus</em> .NET <em>plus</em> the configurations <em>plus</em> the required operating system, all packaged into a single file.</p>
   </div>
 
-  <!-- CAP 2 — A ANALOGIA -->
+  <!-- CHAPTER 2 — THE ANALOGY -->
   <div class="section">
-    <div class="section-label">Capítulo 2 · A Analogia</div>
-    <h2>A analogia certa para um desenvolvedor</h2>
+    <div class="section-label">Chapter 2 · The Analogy</div>
+    <h2>The right analogy for a developer</h2>
 
-    <p>Existem várias analogias para Docker. A mais comum é a da receita vs o prato. Funciona, mas é superficial. Vou te dar a analogia que faz mais sentido para quem programa.</p>
+    <p>There are several analogies for Docker. The most common one is the recipe vs. the dish. It works, but it is superficial. Here is the analogy that makes the most sense for someone who programs.</p>
 
-    <h3>Imagem é uma Classe. Container é uma Instância.</h3>
+    <h3>An Image is a Class. A Container is an Instance.</h3>
 
     <div class="analogy">
       <div class="analogy-card image-card">
         <span class="icon">📋</span>
-        <h4 style="color: var(--accent2);">Imagem</h4>
-        <p>É a <strong>definição</strong>. Um arquivo estático que descreve como o ambiente deve ser. Não roda. Não consome memória. Só existe como blueprint.</p>
+        <h4 style="color: var(--accent2);">Image</h4>
+        <p>It is the <strong>definition</strong>. A static file that describes what the environment should look like. It does not run. It does not consume memory. It exists only as a blueprint.</p>
       </div>
       <div class="analogy-arrow">→</div>
       <div class="analogy-card container-card">
         <span class="icon">⚡</span>
         <h4 style="color: var(--accent);">Container</h4>
-        <p>É a <strong>execução</strong>. Uma imagem que foi "instanciada" e está rodando como processo vivo, com memória, CPU, e estado próprio.</p>
+        <p>It is the <strong>execution</strong>. An image that has been "instantiated" and is running as a live process, with its own memory, CPU, and state.</p>
       </div>
     </div>
 
-    <p>Exatamente como em OOP:</p>
+    <p>Exactly like in OOP:</p>
 
     <div class="code-block">
       <div class="code-header">
@@ -612,42 +612,42 @@
           <div class="dot yellow"></div>
           <div class="dot green"></div>
         </div>
-        <span class="filename">analogia.ts</span>
+        <span class="filename">analogy.ts</span>
       </div>
       <div class="code-body">
-        <span class="line"><span class="comment">// IMAGEM = a definição da classe (não existe em memória ainda)</span></span>
-        <span class="line"><span class="keyword">class</span> <span class="highlight-line">MinhaApi</span> {</span>
-        <span class="line">  <span class="string">runtime</span> = <span class="string">"dotnet 8"</span></span>
-        <span class="line">  <span class="string">porta</span> = <span class="string">8080</span></span>
-        <span class="line">  <span class="string">env</span> = { <span class="string">DB_HOST</span>: <span class="string">"postgres"</span> }</span>
+        <span class="line"><span class="comment">// IMAGE = the class definition (static, does not run)</span></span>
+        <span class="line"><span class="keyword">class</span> <span class="highlight-line">MyApi</span> {</span>
+        <span class="line">  <span class="comment">// .NET 8 runtime</span></span>
+        <span class="line">  <span class="comment">// application files</span></span>
+        <span class="line">  <span class="comment">// environment configurations</span></span>
         <span class="line">}</span>
         <span class="line"> </span>
-        <span class="line"><span class="comment">// CONTAINER = instâncias rodando em memória</span></span>
-        <span class="line"><span class="keyword">const</span> container1 = <span class="keyword">new</span> <span class="highlight-line">MinhaApi</span>() <span class="comment">// porta 8080</span></span>
-        <span class="line"><span class="keyword">const</span> container2 = <span class="keyword">new</span> <span class="highlight-line">MinhaApi</span>() <span class="comment">// porta 8081</span></span>
-        <span class="line"><span class="keyword">const</span> container3 = <span class="keyword">new</span> <span class="highlight-line">MinhaApi</span>() <span class="comment">// porta 8082</span></span>
+        <span class="line"><span class="comment">// CONTAINER = instances running in memory</span></span>
+        <span class="line"><span class="keyword">const</span> container1 = <span class="keyword">new</span> <span class="highlight-line">MyApi</span>() <span class="comment">// port 8080</span></span>
+        <span class="line"><span class="keyword">const</span> container2 = <span class="keyword">new</span> <span class="highlight-line">MyApi</span>() <span class="comment">// port 8081</span></span>
+        <span class="line"><span class="keyword">const</span> container3 = <span class="keyword">new</span> <span class="highlight-line">MyApi</span>() <span class="comment">// port 8082</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment">// A CLASSE não muda. As instâncias têm estado e vida próprios.</span></span>
+        <span class="line"><span class="comment">// The CLASS does not change. Instances have their own state and life cycle.</span></span>
       </div>
     </div>
 
-    <p>Você pode criar quantos containers quiser a partir da mesma imagem. Cada um terá seu próprio estado, sua própria memória, seu próprio ciclo de vida — mas todos partem da mesma definição.</p>
+    <p>You can create as many containers as you want from the same image. Each one will have its own state, its own memory, its own life cycle — but all of them start from the same definition.</p>
 
     <div class="highlight">
-      <strong>Regra de ouro:</strong> a imagem é imutável. Você nunca "edita" uma imagem em execução. Você edita o Dockerfile, gera uma nova imagem, e cria novos containers a partir dela.
+      <strong>Golden rule:</strong> the image is immutable. You never "edit" a running image. You edit the Dockerfile, generate a new image, and create new containers from it.
     </div>
   </div>
 
-  <!-- CAP 3 — IMAGEM -->
+  <!-- CHAPTER 3 — IMAGE -->
   <div class="section">
-    <div class="section-label">Capítulo 3 · Imagem</div>
-    <h2>O que é uma Imagem — em profundidade</h2>
+    <div class="section-label">Chapter 3 · Image</div>
+    <h2>What is an Image — in depth</h2>
 
-    <p>Uma imagem Docker é um arquivo binário composto por <strong>camadas sobrepostas</strong> (layers). Cada camada representa uma instrução do Dockerfile. Entender isso é fundamental para usar Docker de forma eficiente.</p>
+    <p>A Docker image is a binary file composed of <strong>stacked layers</strong>. Each layer represents one instruction from the Dockerfile. Understanding this is fundamental to using Docker efficiently.</p>
 
-    <h3>O Dockerfile — a receita que gera a imagem</h3>
+    <h3>The Dockerfile — the recipe that generates the image</h3>
 
-    <p>Uma imagem não nasce do nada. Você a descreve em um arquivo chamado <code>Dockerfile</code>. Cada linha desse arquivo se torna uma camada da imagem.</p>
+    <p>An image does not appear out of thin air. You describe it in a file called <code>Dockerfile</code>. Each line of that file becomes a layer of the image.</p>
 
     <div class="code-block">
       <div class="code-header">
@@ -659,166 +659,166 @@
         <span class="filename">Dockerfile</span>
       </div>
       <div class="code-body">
-        <span class="line"><span class="comment"># Camada 1 — qual sistema operacional base usar</span></span>
+        <span class="line"><span class="comment"># Layer 1 — which base operating system to use</span></span>
         <span class="line"><span class="keyword">FROM</span> <span class="string">mcr.microsoft.com/dotnet/aspnet:8.0</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Camada 2 — definir o diretório de trabalho dentro do container</span></span>
+        <span class="line"><span class="comment"># Layer 2 — set the working directory inside the container</span></span>
         <span class="line"><span class="keyword">WORKDIR</span> <span class="string">/app</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Camada 3 — copiar os arquivos do seu projeto para dentro da imagem</span></span>
+        <span class="line"><span class="comment"># Layer 3 — copy your project files into the image</span></span>
         <span class="line"><span class="keyword">COPY</span> <span class="string">. .</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Camada 4 — expor a porta que a aplicação usa</span></span>
+        <span class="line"><span class="comment"># Layer 4 — expose the port the application uses</span></span>
         <span class="line"><span class="keyword">EXPOSE</span> <span class="string">8080</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Camada 5 — o comando que roda quando o container iniciar</span></span>
-        <span class="line"><span class="keyword">ENTRYPOINT</span> [<span class="string">"dotnet"</span>, <span class="string">"MinhaApi.dll"</span>]</span>
+        <span class="line"><span class="comment"># Layer 5 — the command that runs when the container starts</span></span>
+        <span class="line"><span class="keyword">ENTRYPOINT</span> [<span class="string">"dotnet"</span>, <span class="string">"MyApi.dll"</span>]</span>
       </div>
     </div>
 
-    <h3>Camadas — o que torna Docker inteligente</h3>
+    <h3>Layers — what makes Docker smart</h3>
 
-    <p>Cada instrução do Dockerfile cria uma camada. O Docker <strong>cacheia</strong> cada camada separadamente. Se você mudar apenas o seu código (Camada 3), ele não precisa baixar o .NET de novo (Camada 1) nem recriar o diretório (Camada 2) — apenas reexecuta a partir da camada modificada.</p>
+    <p>Each Dockerfile instruction creates a layer. Docker <strong>caches</strong> each layer separately. If you only change your code (Layer 3), it does not need to download .NET again (Layer 1) or recreate the directory (Layer 2) — it only re-executes from the modified layer onward.</p>
 
     <div class="layers">
       <div class="layer l5">
         <div class="num">5</div>
-        <span>ENTRYPOINT — comando de inicialização</span>
+        <span>ENTRYPOINT — startup command</span>
       </div>
       <div class="layer l4">
         <div class="num">4</div>
-        <span>EXPOSE — porta da aplicação</span>
+        <span>EXPOSE — application port</span>
       </div>
       <div class="layer l3">
         <div class="num">3</div>
-        <span>COPY — seu código-fonte</span>
+        <span>COPY — your source code</span>
       </div>
       <div class="layer l2">
         <div class="num">2</div>
-        <span>WORKDIR — diretório de trabalho</span>
+        <span>WORKDIR — working directory</span>
       </div>
       <div class="layer l1">
         <div class="num">1</div>
-        <span>FROM — sistema operacional base</span>
+        <span>FROM — base operating system</span>
       </div>
     </div>
 
-    <p>Todas essas camadas são <strong>somente leitura</strong>. A imagem em si nunca muda. Quando você cria um container a partir dela, o Docker adiciona uma única camada extra no topo — a camada de escrita.</p>
+    <p>All these layers are <strong>read-only</strong>. The image itself never changes. When you create a container from it, Docker adds a single extra layer on top — the write layer.</p>
 
-    <h3>Onde ficam as imagens?</h3>
+    <h3>Where do images live?</h3>
 
-    <p>Imagens ficam armazenadas em <strong>registries</strong>. O registry padrão é o <strong>Docker Hub</strong> — pense nele como o npm, mas para imagens Docker. Quando você executa <code>docker pull nginx</code>, está baixando a imagem oficial do nginx do Docker Hub para sua máquina.</p>
+    <p>Images are stored in <strong>registries</strong>. The default registry is <strong>Docker Hub</strong> — think of it as npm, but for Docker images. When you run <code>docker pull nginx</code>, you are downloading the official nginx image from Docker Hub to your machine.</p>
 
     <div class="concept-grid">
       <div class="concept-card blue">
         <h4>Docker Hub</h4>
-        <p>Registry público. Imagens oficiais do nginx, postgres, node, .NET, etc. Qualquer um pode publicar e baixar.</p>
+        <p>Public registry. Official images for nginx, postgres, node, .NET, and more. Anyone can publish and pull.</p>
       </div>
       <div class="concept-card cyan">
-        <h4>Registry privado</h4>
-        <p>Sua empresa pode ter um registry próprio (AWS ECR, Azure ACR, GitHub Container Registry) para imagens internas.</p>
+        <h4>Private registry</h4>
+        <p>Your company can have its own registry (AWS ECR, Azure ACR, GitHub Container Registry) for internal images.</p>
       </div>
       <div class="concept-card green">
-        <h4>Cache local</h4>
-        <p>Imagens baixadas ou buildadas ficam em cache na sua máquina. <code>docker images</code> lista todas.</p>
+        <h4>Local cache</h4>
+        <p>Images you pull or build are cached on your machine. <code>docker images</code> lists all of them.</p>
       </div>
       <div class="concept-card orange">
         <h4>Tags</h4>
-        <p>Versões de uma imagem. <code>nginx:latest</code>, <code>node:20</code>, <code>postgres:16-alpine</code>. Sempre especifique a versão em produção.</p>
+        <p>Versions of an image. <code>nginx:latest</code>, <code>node:20</code>, <code>postgres:16-alpine</code>. Always specify the version in production.</p>
       </div>
     </div>
   </div>
 
-  <!-- CAP 4 — CONTAINER -->
+  <!-- CHAPTER 4 — CONTAINER -->
   <div class="section">
-    <div class="section-label">Capítulo 4 · Container</div>
-    <h2>O que é um Container — em profundidade</h2>
+    <div class="section-label">Chapter 4 · Container</div>
+    <h2>What is a Container — in depth</h2>
 
-    <p>Um container é uma imagem em execução. Mas entender o que acontece por baixo muda como você trabalha com eles.</p>
+    <p>A container is a running image. But understanding what happens under the hood changes how you work with them.</p>
 
-    <h3>O container não é uma máquina virtual</h3>
+    <h3>A container is not a virtual machine</h3>
 
-    <p>Esse é o maior equívoco sobre Docker. Muita gente pensa que container = VM leve. Não é.</p>
+    <p>This is the biggest misconception about Docker. Many people think container = lightweight VM. It is not.</p>
 
     <table class="compare-table">
       <tr>
-        <th>Característica</th>
-        <th>Máquina Virtual (VM)</th>
-        <th>Container Docker</th>
+        <th>Characteristic</th>
+        <th>Virtual Machine (VM)</th>
+        <th>Docker Container</th>
       </tr>
       <tr>
-        <td>Sistema operacional</td>
-        <td>Próprio, completo (kernel + tudo)</td>
-        <td>Compartilha o kernel do host</td>
+        <td>Operating system</td>
+        <td>Its own, complete (kernel + everything)</td>
+        <td>Shares the host kernel</td>
       </tr>
       <tr>
-        <td>Tempo de inicialização</td>
-        <td>Minutos</td>
-        <td>Milissegundos a segundos</td>
+        <td>Startup time</td>
+        <td>Minutes</td>
+        <td>Milliseconds to seconds</td>
       </tr>
       <tr>
-        <td>Tamanho típico</td>
+        <td>Typical size</td>
         <td>GBs</td>
         <td>MBs</td>
       </tr>
       <tr>
-        <td>Isolamento</td>
-        <td>Completo (hardware virtualizado)</td>
-        <td>Processo isolado (namespace + cgroups)</td>
+        <td>Isolation</td>
+        <td>Complete (virtualized hardware)</td>
+        <td>Isolated process (namespaces + cgroups)</td>
       </tr>
       <tr>
-        <td>Overhead de performance</td>
-        <td>Significativo</td>
-        <td>Quase zero</td>
+        <td>Performance overhead</td>
+        <td>Significant</td>
+        <td>Near zero</td>
       </tr>
     </table>
 
-    <p>Um container é, na essência, um <strong>processo isolado</strong> rodando no seu sistema operacional. O Linux usa dois recursos para criar esse isolamento:</p>
+    <p>A container is, at its core, an <strong>isolated process</strong> running on your operating system. Linux uses two features to create this isolation:</p>
 
     <div class="concept-grid">
       <div class="concept-card blue">
         <h4>Namespaces</h4>
-        <p>Fazem o container enxergar apenas seus próprios processos, rede, sistema de arquivos — como se fosse um OS próprio, mas não é.</p>
+        <p>Make the container see only its own processes, network, and file system — as if it were its own OS, but it is not.</p>
       </div>
       <div class="concept-card cyan">
         <h4>cgroups</h4>
-        <p>Limitam os recursos que o container pode usar: CPU, memória, I/O. Garante que um container não consuma tudo da máquina.</p>
+        <p>Limit the resources the container can use: CPU, memory, I/O. This ensures one container cannot consume everything on the host machine.</p>
       </div>
     </div>
 
-    <h3>A camada de escrita — por que containers são efêmeros</h3>
+    <h3>The write layer — why containers are ephemeral</h3>
 
-    <p>Lembra que todas as camadas da imagem são somente leitura? Quando um container é criado, o Docker adiciona uma camada de escrita <strong>temporária</strong> no topo.</p>
+    <p>Remember that all image layers are read-only? When a container is created, Docker adds a <strong>temporary</strong> write layer on top.</p>
 
     <div class="layers">
       <div class="layer rw">
         <div class="num">✏</div>
-        <span>Camada de escrita (container) — temporária, destruída ao parar</span>
+        <span>Write layer (container) — temporary, destroyed when stopped</span>
       </div>
       <div class="layer l5">
         <div class="num">R</div>
-        <span>Camada 5 — somente leitura (da imagem)</span>
+        <span>Layer 5 — read-only (from the image)</span>
       </div>
       <div class="layer l4">
         <div class="num">R</div>
-        <span>Camada 4 — somente leitura (da imagem)</span>
+        <span>Layer 4 — read-only (from the image)</span>
       </div>
       <div class="layer l3">
         <div class="num">R</div>
-        <span>Camada 3 — somente leitura (da imagem)</span>
+        <span>Layer 3 — read-only (from the image)</span>
       </div>
     </div>
 
     <div class="highlight orange-hl">
-      <strong>Implicação importante:</strong> qualquer dado que você escrever <em>dentro</em> de um container (logs, arquivos, dados de banco) some quando o container para. Para persistir dados, você usa <strong>volumes</strong> — aprenderemos isso na próxima semana.
+      <strong>Important implication:</strong> any data you write <em>inside</em> a container (logs, files, database data) is lost when the container stops. To persist data, you use <strong>volumes</strong> — we will learn that next week.
     </div>
 
-    <h3>Estados de um container</h3>
+    <h3>Container states</h3>
 
-    <p>Um container tem um ciclo de vida. Entender os estados é essencial para debugar problemas.</p>
+    <p>A container has a life cycle. Understanding the states is essential for debugging problems.</p>
 
     <div class="docker-diagram">
-      <h4>Ciclo de vida de um container</h4>
+      <h4>Container life cycle</h4>
       <div class="diagram-row">
         <div class="diagram-box image">
           <strong>created</strong>
@@ -829,7 +829,7 @@
       <div class="diagram-row">
         <div class="diagram-box running">
           <strong>running</strong>
-          <span>processo ativo</span>
+          <span>active process</span>
         </div>
       </div>
       <div class="diagram-row" style="gap: 40px; margin-top: 8px;">
@@ -837,14 +837,14 @@
           <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:6px;">docker pause</div>
           <div class="diagram-box container">
             <strong>paused</strong>
-            <span>congelado</span>
+            <span>frozen</span>
           </div>
         </div>
         <div style="text-align:center">
           <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:6px;">docker stop</div>
           <div class="diagram-box image">
             <strong>exited</strong>
-            <span>parado, existe ainda</span>
+            <span>stopped, still exists</span>
           </div>
         </div>
       </div>
@@ -852,80 +852,80 @@
       <div class="diagram-row">
         <div class="diagram-box registry">
           <strong>removed</strong>
-          <span>destruído</span>
+          <span>destroyed</span>
         </div>
       </div>
     </div>
 
     <div class="highlight">
-      <strong>Detalhe crucial:</strong> <code>docker stop</code> para o container mas não destrói. Ele continua existindo com seu estado. <code>docker rm</code> destrói de vez. Use <code>docker run --rm</code> para destruir automaticamente ao parar.
+      <strong>Crucial detail:</strong> <code>docker stop</code> stops the container but does not destroy it. It still exists with its state intact. <code>docker rm</code> destroys it permanently. Use <code>docker run --rm</code> to destroy it automatically when it stops.
     </div>
   </div>
 
-  <!-- CAP 5 — DIAGRAMA COMPLETO -->
+  <!-- CHAPTER 5 — FULL DIAGRAM -->
   <div class="section">
-    <div class="section-label">Capítulo 5 · Visão Completa</div>
-    <h2>Como tudo se conecta</h2>
+    <div class="section-label">Chapter 5 · Full Picture</div>
+    <h2>How everything connects</h2>
 
     <div class="docker-diagram">
-      <h4>Do Dockerfile ao Container em produção</h4>
+      <h4>From Dockerfile to Container in production</h4>
 
-      <div class="diagram-label">Você escreve</div>
+      <div class="diagram-label">You write</div>
       <div class="diagram-row">
         <div class="diagram-box registry">
           <strong>Dockerfile</strong>
-          <span>instruções de build</span>
+          <span>build instructions</span>
         </div>
       </div>
 
       <div class="diagram-arrow">↓ docker build</div>
 
-      <div class="diagram-label">Gerado localmente</div>
+      <div class="diagram-label">Generated locally</div>
       <div class="diagram-row">
         <div class="diagram-box image">
-          <strong>Imagem</strong>
-          <span>minha-api:v1.0</span>
+          <strong>Image</strong>
+          <span>my-api:v1.0</span>
         </div>
       </div>
 
-      <div class="diagram-arrow">↓ docker push (opcional)</div>
+      <div class="diagram-arrow">↓ docker push (optional)</div>
 
-      <div class="diagram-label">Armazenado no registry</div>
+      <div class="diagram-label">Stored in registry</div>
       <div class="diagram-row">
         <div class="diagram-box registry">
           <strong>Docker Hub / ECR / ACR</strong>
-          <span>enzoagw/minha-api:v1.0</span>
+          <span>enzoagw/my-api:v1.0</span>
         </div>
       </div>
 
-      <div class="diagram-arrow">↓ docker run (em qualquer máquina)</div>
+      <div class="diagram-arrow">↓ docker run (on any machine)</div>
 
-      <div class="diagram-label">Rodando em memória</div>
+      <div class="diagram-label">Running in memory</div>
       <div class="diagram-row">
         <div class="diagram-box running">
           <strong>Container 1</strong>
-          <span>porta 8080</span>
+          <span>port 8080</span>
         </div>
         <div class="diagram-box running">
           <strong>Container 2</strong>
-          <span>porta 8081</span>
+          <span>port 8081</span>
         </div>
         <div class="diagram-box running">
           <strong>Container 3</strong>
-          <span>porta 8082</span>
+          <span>port 8082</span>
         </div>
       </div>
     </div>
 
-    <p>Mesma imagem, três containers. Cada um é um processo independente. Isso é a base do que escala em produção — orquestradores como Kubernetes fazem exatamente isso, só que com centenas de containers.</p>
+    <p>Same image, three containers. Each one is an independent process. This is the foundation of what scales in production — orchestrators like Kubernetes do exactly this, just with hundreds of containers.</p>
   </div>
 
-  <!-- CAP 6 — COMANDOS -->
+  <!-- CHAPTER 6 — COMMANDS -->
   <div class="section">
-    <div class="section-label">Capítulo 6 · Comandos</div>
-    <h2>Os comandos que você vai usar todo dia</h2>
+    <div class="section-label">Chapter 6 · Commands</div>
+    <h2>The commands you will use every day</h2>
 
-    <h3>Imagens</h3>
+    <h3>Images</h3>
 
     <div class="code-block">
       <div class="code-header">
@@ -937,20 +937,20 @@
         <span class="filename">terminal</span>
       </div>
       <div class="code-body">
-        <span class="line"><span class="comment"># Baixar uma imagem do Docker Hub</span></span>
+        <span class="line"><span class="comment"># Pull an image from Docker Hub</span></span>
         <span class="line"><span class="prompt">$ </span><span class="cmd">docker pull nginx</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Listar todas as imagens locais</span></span>
+        <span class="line"><span class="comment"># List all local images</span></span>
         <span class="line"><span class="prompt">$ </span><span class="cmd">docker images</span></span>
         <span class="line"><span class="output">REPOSITORY   TAG       IMAGE ID       CREATED        SIZE</span></span>
         <span class="line"><span class="output">nginx        latest    a72860cb95fd   2 weeks ago    187MB</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Buildar uma imagem a partir do Dockerfile da pasta atual</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker build <span class="flag">-t</span> minha-api:v1 .</span></span>
-        <span class="line"><span class="comment">#                  ↑ nome:tag  ↑ contexto (pasta atual)</span></span>
+        <span class="line"><span class="comment"># Build an image from the Dockerfile in the current directory</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker build <span class="flag">-t</span> my-api:v1 .</span></span>
+        <span class="line"><span class="comment">#                  ↑ name:tag  ↑ context (current directory)</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Remover uma imagem</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker rmi minha-api:v1</span></span>
+        <span class="line"><span class="comment"># Remove an image</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker rmi my-api:v1</span></span>
       </div>
     </div>
 
@@ -966,69 +966,70 @@
         <span class="filename">terminal</span>
       </div>
       <div class="code-body">
-        <span class="line"><span class="comment"># Criar e iniciar um container</span></span>
+        <span class="line"><span class="comment"># Create and start a container</span></span>
         <span class="line"><span class="prompt">$ </span><span class="cmd">docker run nginx</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Flags mais importantes do docker run:</span></span>
+        <span class="line"><span class="comment"># Most important flags for docker run:</span></span>
         <span class="line"><span class="prompt">$ </span><span class="cmd">docker run \</span></span>
-        <span class="line">  <span class="flag">  -d</span> <span class="comment">           \  # detached: roda em background (não trava o terminal)</span></span>
-        <span class="line">  <span class="flag">  -p 8080:80</span> <span class="comment">   \  # porta: mapeia host:container</span></span>
-        <span class="line">  <span class="flag">  --name meu-nginx</span> <span class="comment">\  # nome amigável</span></span>
-        <span class="line">  <span class="flag">  --rm</span> <span class="comment">         \  # remove automaticamente ao parar</span></span>
-        <span class="line">  <span class="string">  nginx</span>           <span class="comment">   # nome da imagem</span></span>
+        <span class="line">  <span class="flag">  -d</span> <span class="comment">              \  # detached: runs in the background (does not block the terminal)</span></span>
+        <span class="line">  <span class="flag">  -p 8080:80</span> <span class="comment">      \  # port: maps host:container</span></span>
+        <span class="line">  <span class="flag">  --name my-nginx</span> <span class="comment">  \  # friendly name</span></span>
+        <span class="line">  <span class="flag">  --rm</span> <span class="comment">            \  # automatically removes the container when it stops</span></span>
+        <span class="line">  <span class="string">  nginx</span>              <span class="comment">   # image name</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Listar containers em execução</span></span>
+        <span class="line"><span class="comment"># List running containers</span></span>
         <span class="line"><span class="prompt">$ </span><span class="cmd">docker ps</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Listar TODOS (incluindo parados)</span></span>
+        <span class="line"><span class="comment"># List ALL containers (including stopped ones)</span></span>
         <span class="line"><span class="prompt">$ </span><span class="cmd">docker ps <span class="flag">-a</span></span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Ver logs de um container</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker logs meu-nginx</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker logs <span class="flag">-f</span> meu-nginx</span>  <span class="comment"># -f = follow (tempo real)</span></span>
+        <span class="line"><span class="comment"># View logs from a container</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker logs my-nginx</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker logs <span class="flag">-f</span> my-nginx</span>  <span class="comment"># -f = follow (real-time)</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Entrar dentro de um container em execução</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker exec <span class="flag">-it</span> meu-nginx bash</span></span>
-        <span class="line"><span class="comment">#                 ↑ -i = interativo, -t = terminal</span></span>
+        <span class="line"><span class="comment"># Open a terminal inside a running container</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker exec <span class="flag">-it</span> my-nginx bash</span></span>
+        <span class="line"><span class="comment">#                 ↑ -i = interactive, -t = terminal</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Parar um container</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker stop meu-nginx</span></span>
+        <span class="line"><span class="comment"># Stop a container</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker stop my-nginx</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Remover um container parado</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker rm meu-nginx</span></span>
+        <span class="line"><span class="comment"># Remove a stopped container</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker rm my-nginx</span></span>
         <span class="line"> </span>
-        <span class="line"><span class="comment"># Parar E remover em um comando</span></span>
-        <span class="line"><span class="prompt">$ </span><span class="cmd">docker rm <span class="flag">-f</span> meu-nginx</span></span>
+        <span class="line"><span class="comment"># Stop AND remove in one command</span></span>
+        <span class="line"><span class="prompt">$ </span><span class="cmd">docker rm <span class="flag">-f</span> my-nginx</span></span>
       </div>
     </div>
 
-    <h3>O -p explicado</h3>
+    <h3>The -p flag explained</h3>
 
-    <p>A flag <code>-p 8080:80</code> é o que mais confunde no início. Ela mapeia portas:</p>
+    <p>The <code>-p 8080:80</code> flag is the one that confuses people the most at first. It maps ports:</p>
 
     <div class="highlight">
-      <strong>-p [porta-da-sua-máquina]:[porta-dentro-do-container]</strong><br/><br/>
-      O container vive em uma rede isolada. Ele não sabe que existe um "fora". Você precisa criar uma ponte: <em>"quando alguém bater na porta 8080 da minha máquina, encaminhe para a porta 80 dentro do container"</em>.
+      <strong>-p [your-machine-port]:[port-inside-the-container]</strong><br/><br/>
+      The container lives on an isolated network. It has no idea there is an "outside." You need to create a bridge: <em>"when someone knocks on port 8080 of my machine, forward it to port 80 inside the container."</em>
     </div>
   </div>
 
-  <!-- CAP 7 — MÃO NA MASSA -->
+  <!-- CHAPTER 7 — HANDS-ON -->
   <div class="section">
-    <div class="section-label">Capítulo 7 · Objetivo do Dia</div>
-    <h2>Mão na massa — container rodando no terminal</h2>
+    <div class="section-label">Chapter 7 · Goal of the Day</div>
+    <h2>Hands-on — container running in the terminal</h2>
 
-    <p>Agora vamos executar. Siga cada passo na ordem. O objetivo é ter um container rodando e você enxergando o resultado no navegador.</p>
+    <p>Now let's execute. Follow each step in order. The goal is to have a container running and see the result in your browser.</p>
 
-    <h3>Pré-requisito</h3>
-    <p>Docker Desktop instalado e rodando. Se ainda não instalou: <strong>docker.com/products/docker-desktop</strong></p>
+    <h3>Prerequisite</h3>
+
+    <p>Docker Desktop installed and running. If you have not installed it yet: <strong>docker.com/products/docker-desktop</strong></p>
 
     <div class="steps">
 
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h4>Verifique se o Docker está rodando</h4>
-          <p>Abra o terminal e execute:</p>
+          <h4>Verify Docker is running</h4>
+          <p>Open the terminal and run:</p>
         </div>
       </div>
 
@@ -1043,15 +1044,15 @@
           <span class="line"> </span>
           <span class="line"><span class="prompt">$ </span><span class="cmd">docker ps</span></span>
           <span class="line"><span class="success">CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES</span></span>
-          <span class="line"><span class="comment"># Se aparecer essa linha de cabeçalho, está funcionando.</span></span>
+          <span class="line"><span class="comment"># If that header line appears, Docker is working.</span></span>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h4>Rode seu primeiro container — nginx</h4>
-          <p>Vamos subir um servidor web nginx. O Docker vai baixar a imagem automaticamente se não tiver localmente.</p>
+          <h4>Run your first container — nginx</h4>
+          <p>Let's start an nginx web server. Docker will download the image automatically if it is not available locally.</p>
         </div>
       </div>
 
@@ -1061,25 +1062,25 @@
           <span class="filename">PowerShell</span>
         </div>
         <div class="code-body">
-          <span class="line"><span class="prompt">$ </span><span class="cmd">docker run <span class="flag">-d -p 8080:80 --name</span> meu-nginx nginx</span></span>
+          <span class="line"><span class="prompt">$ </span><span class="cmd">docker run <span class="flag">-d -p 8080:80 --name</span> my-nginx nginx</span></span>
           <span class="line"> </span>
-          <span class="line"><span class="comment"># O que cada parte significa:</span></span>
-          <span class="line"><span class="comment"># -d          → roda em background (não trava o terminal)</span></span>
-          <span class="line"><span class="comment"># -p 8080:80  → mapeia porta 8080 da sua máquina → porta 80 do container</span></span>
-          <span class="line"><span class="comment"># --name      → dá um nome amigável ao container</span></span>
-          <span class="line"><span class="comment"># nginx       → nome da imagem a usar</span></span>
+          <span class="line"><span class="comment"># What each part means:</span></span>
+          <span class="line"><span class="comment"># -d          → runs in the background (does not block the terminal)</span></span>
+          <span class="line"><span class="comment"># -p 8080:80  → maps port 8080 on your machine → port 80 inside the container</span></span>
+          <span class="line"><span class="comment"># --name      → gives the container a friendly name</span></span>
+          <span class="line"><span class="comment"># nginx       → name of the image to use</span></span>
           <span class="line"> </span>
           <span class="line"><span class="output">Unable to find image 'nginx:latest' locally</span></span>
           <span class="line"><span class="output">latest: Pulling from library/nginx</span></span>
           <span class="line"><span class="output">...</span></span>
-          <span class="line"><span class="success">a72860cb95fd2b0f4a...  ← ID do container criado</span></span>
+          <span class="line"><span class="success">a72860cb95fd2b0f4a...  ← ID of the created container</span></span>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h4>Confirme que está rodando</h4>
+          <h4>Confirm it is running</h4>
         </div>
       </div>
 
@@ -1091,22 +1092,22 @@
         <div class="code-body">
           <span class="line"><span class="prompt">$ </span><span class="cmd">docker ps</span></span>
           <span class="line"><span class="success">CONTAINER ID   IMAGE   STATUS         PORTS                  NAMES</span></span>
-          <span class="line"><span class="success">a72860cb95fd   nginx   Up 3 seconds   0.0.0.0:8080->80/tcp   meu-nginx</span></span>
+          <span class="line"><span class="success">a72860cb95fd   nginx   Up 3 seconds   0.0.0.0:8080->80/tcp   my-nginx</span></span>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <h4>Abra no navegador</h4>
-          <p>Acesse <code>http://localhost:8080</code> — você verá a página padrão do nginx. Um servidor web completo rodando em um container isolado na sua máquina.</p>
+          <h4>Open it in the browser</h4>
+          <p>Go to <code>http://localhost:8080</code> — you will see the default nginx page. A complete web server running in an isolated container on your machine.</p>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">5</div>
         <div class="step-content">
-          <h4>Explore — entre dentro do container</h4>
+          <h4>Explore — enter the container</h4>
         </div>
       </div>
 
@@ -1116,18 +1117,18 @@
           <span class="filename">PowerShell</span>
         </div>
         <div class="code-body">
-          <span class="line"><span class="comment"># Entra no terminal do container (como se fosse SSH)</span></span>
-          <span class="line"><span class="prompt">$ </span><span class="cmd">docker exec <span class="flag">-it</span> meu-nginx bash</span></span>
-          <span class="line"><span class="success">root@a72860cb95fd:/#</span>  <span class="comment">← você está DENTRO do container agora</span></span>
+          <span class="line"><span class="comment"># Open a terminal inside the container (like SSH)</span></span>
+          <span class="line"><span class="prompt">$ </span><span class="cmd">docker exec <span class="flag">-it</span> my-nginx bash</span></span>
+          <span class="line"><span class="success">root@a72860cb95fd:/#</span>  <span class="comment">← you are now INSIDE the container</span></span>
           <span class="line"> </span>
-          <span class="line"><span class="comment"># Veja os processos que existem DENTRO desse container</span></span>
+          <span class="line"><span class="comment"># See the processes that exist INSIDE this container</span></span>
           <span class="line"><span class="prompt">root@a72860:/# </span><span class="cmd">ps aux</span></span>
           <span class="line"><span class="output">USER   PID  COMMAND</span></span>
           <span class="line"><span class="output">root     1  nginx: master process</span></span>
           <span class="line"><span class="output">nginx   29  nginx: worker process</span></span>
-          <span class="line"><span class="comment"># Só esses processos existem aqui. Isolamento total.</span></span>
+          <span class="line"><span class="comment"># Only these processes exist here. Total isolation.</span></span>
           <span class="line"> </span>
-          <span class="line"><span class="comment"># Sair do container</span></span>
+          <span class="line"><span class="comment"># Exit the container</span></span>
           <span class="line"><span class="prompt">root@a72860:/# </span><span class="cmd">exit</span></span>
         </div>
       </div>
@@ -1135,7 +1136,7 @@
       <div class="step">
         <div class="step-num">6</div>
         <div class="step-content">
-          <h4>Veja os logs em tempo real</h4>
+          <h4>View logs in real time</h4>
         </div>
       </div>
 
@@ -1145,8 +1146,8 @@
           <span class="filename">PowerShell</span>
         </div>
         <div class="code-body">
-          <span class="line"><span class="comment"># Acompanhe os logs enquanto acessa localhost:8080 no navegador</span></span>
-          <span class="line"><span class="prompt">$ </span><span class="cmd">docker logs <span class="flag">-f</span> meu-nginx</span></span>
+          <span class="line"><span class="comment"># Watch the logs while you visit localhost:8080 in the browser</span></span>
+          <span class="line"><span class="prompt">$ </span><span class="cmd">docker logs <span class="flag">-f</span> my-nginx</span></span>
           <span class="line"><span class="output">172.17.0.1 - - [14/May/2026] "GET / HTTP/1.1" 200 615</span></span>
           <span class="line"><span class="output">172.17.0.1 - - [14/May/2026] "GET /favicon.ico" 404 153</span></span>
         </div>
@@ -1155,7 +1156,7 @@
       <div class="step">
         <div class="step-num">7</div>
         <div class="step-content">
-          <h4>Pare e limpe</h4>
+          <h4>Stop and clean up</h4>
         </div>
       </div>
 
@@ -1165,61 +1166,61 @@
           <span class="filename">PowerShell</span>
         </div>
         <div class="code-body">
-          <span class="line"><span class="prompt">$ </span><span class="cmd">docker stop meu-nginx</span></span>
-          <span class="line"><span class="success">meu-nginx</span></span>
+          <span class="line"><span class="prompt">$ </span><span class="cmd">docker stop my-nginx</span></span>
+          <span class="line"><span class="success">my-nginx</span></span>
           <span class="line"> </span>
-          <span class="line"><span class="prompt">$ </span><span class="cmd">docker rm meu-nginx</span></span>
-          <span class="line"><span class="success">meu-nginx</span></span>
+          <span class="line"><span class="prompt">$ </span><span class="cmd">docker rm my-nginx</span></span>
+          <span class="line"><span class="success">my-nginx</span></span>
           <span class="line"> </span>
           <span class="line"><span class="prompt">$ </span><span class="cmd">docker ps</span></span>
           <span class="line"><span class="output">CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES</span></span>
-          <span class="line"><span class="comment"># Vazio — limpo.</span></span>
+          <span class="line"><span class="comment"># Empty — all clean.</span></span>
         </div>
       </div>
     </div>
 
-    <!-- OBJETIVO CONQUISTADO -->
+    <!-- GOAL ACHIEVED -->
     <div class="final-goal">
       <span class="icon">✅</span>
-      <h3>Objetivo do dia conquistado</h3>
-      <p>Você rodou um container, explorou seu interior, acompanhou logs em tempo real, e o removeu corretamente. Você entende agora a diferença real entre imagem e container.</p>
+      <h3>Goal of the day achieved</h3>
+      <p>You ran a container, explored its interior, watched logs in real time, and removed it correctly. You now understand the real difference between an image and a container.</p>
     </div>
   </div>
 
-  <!-- RESUMO -->
+  <!-- SUMMARY -->
   <div class="section">
-    <div class="section-label">Resumo</div>
-    <h2>O que você aprendeu hoje</h2>
+    <div class="section-label">Summary</div>
+    <h2>What you learned today</h2>
 
     <ul class="checklist">
-      <li class="done">Docker resolve o problema de "na minha máquina funciona" empacotando código + ambiente juntos</li>
-      <li class="done">Imagem = definição estática (como uma classe). Imutável, versionável, portátil</li>
-      <li class="done">Container = execução da imagem (como uma instância). Tem estado próprio, ciclo de vida próprio</li>
-      <li class="done">Imagens são compostas por camadas cacheadas — builds são rápidos porque só reexecutam o que mudou</li>
-      <li class="done">Containers compartilham o kernel do host — não são VMs, são processos isolados</li>
-      <li class="done">A camada de escrita do container é temporária — dados somem ao parar (volumes resolvem isso)</li>
-      <li class="done">Comandos essenciais: docker run, docker ps, docker stop, docker rm, docker logs, docker exec</li>
-      <li class="done">A flag -p mapeia porta da sua máquina para porta dentro do container</li>
+      <li class="done">Docker solves the "it works on my machine" problem by packaging code and environment together</li>
+      <li class="done">Image = static definition (like a class). Immutable, versionable, portable</li>
+      <li class="done">Container = execution of an image (like an instance). Has its own state and its own life cycle</li>
+      <li class="done">Images are composed of cached layers — builds are fast because only the changed layer is re-executed</li>
+      <li class="done">Containers share the host kernel — they are not VMs, they are isolated processes</li>
+      <li class="done">The container's write layer is temporary — data is lost when it stops (volumes solve this)</li>
+      <li class="done">Essential commands: docker run, docker ps, docker stop, docker rm, docker logs, docker exec</li>
+      <li class="done">The -p flag maps a port on your machine to a port inside the container</li>
     </ul>
 
-    <h3>O que vem na próxima sessão</h3>
+    <h3>What comes in the next session</h3>
 
     <div class="concept-grid">
       <div class="concept-card blue">
-        <h4>Dockerfile para o nexus-core</h4>
-        <p>Escrever o Dockerfile real do seu projeto .NET e gerar a primeira imagem própria</p>
+        <h4>Dockerfile for nexus-core</h4>
+        <p>Write the actual Dockerfile for your .NET project and generate your first custom image</p>
       </div>
       <div class="concept-card cyan">
         <h4>docker-compose.yml</h4>
-        <p>Subir API + banco de dados juntos com um único comando</p>
+        <p>Start the API and the database together with a single command</p>
       </div>
       <div class="concept-card green">
         <h4>Volumes</h4>
-        <p>Persistir dados do banco fora do container — essencial para produção</p>
+        <p>Persist database data outside the container — essential for production</p>
       </div>
       <div class="concept-card orange">
-        <h4>Variáveis de ambiente</h4>
-        <p>Configurar secrets e connection strings sem hardcode</p>
+        <h4>Environment variables</h4>
+        <p>Configure secrets and connection strings without hardcoding them</p>
       </div>
     </div>
   </div>
@@ -1227,7 +1228,7 @@
 </div>
 
 <div class="footer">
-  <span>Fase 1 · Semana 1</span> · Enzo Alexandre · Maio 2026
+  <span>Phase 1 · Week 1</span> · Enzo Alexandre · May 2026
 </div>
 
 </body>
